@@ -2,8 +2,13 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include <string>
+#include <cstdlib>
 #include "bibli.hpp"
 #include "structs.hpp"
+
+sf::RenderWindow window;
+sf::CircleShape cercle;
 
 /*
     g++ -std=c++14 src/*.cpp -o bin/prog -I include -L lib -lsfml-graphics -lsfml-window -lsfml-system
@@ -11,24 +16,12 @@
 
 int main()
 {
-    sf::RenderWindow window;
-
-    sf::Font font;
-
-    if(!font.loadFromFile("src/police/arial.ttf"))
-        SF_Error(&window);
-
-    sf::Text text;
-
-    text.setFont(font);
-    text.setString("hello world");
-    text.setCharacterSize(24);
-    text.setFillColor(sf::Color::White);
-    text.setStyle(sf::Text::Bold);
-
-    text.setPosition((WIN_W - text.getPosition().x) / 2, (WIN_H - text.getPosition().x) / 2);
-
     window.create(sf::VideoMode(WIN_W, WIN_H), "My window", sf::Style::Fullscreen);
+    window.setFramerateLimit(144);
+
+    cercle.setFillColor(sf::Color::Black);
+    cercle.setRadius(50);
+    cercle.setPosition(100, 100);
 
     while (window.isOpen())
     {
@@ -66,7 +59,6 @@ int main()
         }
 
         window.clear(sf::Color::Black);
-        window.draw(text);
         window.display(); 
     }
 
