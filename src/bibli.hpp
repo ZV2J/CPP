@@ -1,10 +1,9 @@
 #ifndef __BIBLI__HPP__
 #define __BIBLI__HPP__
 
-<<<<<<< HEAD
-void SF_Error(sf::RenderWindow *p);
-=======
+#define WIN_W 1920
+#define WIN_H 1080
 
->>>>>>> 4d46bf947206f2e875920c73b798294682795034
+void SF_Error(sf::RenderWindow *p);
 
 #endif

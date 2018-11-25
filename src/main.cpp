@@ -18,23 +18,56 @@ int main()
     if(!font.loadFromFile("src/police/arial.ttf"))
         SF_Error(&window);
 
-    window.create(sf::VideoMode(800, 600), "My window");
+    sf::Text text;
+
+    text.setFont(font);
+    text.setString("hello world");
+    text.setCharacterSize(24);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+
+    text.setPosition((WIN_W - text.getPosition().x) / 2, (WIN_H - text.getPosition().x) / 2);
+
+    window.create(sf::VideoMode(WIN_W, WIN_H), "My window", sf::Style::Fullscreen);
 
     while (window.isOpen())
     {
         sf::Event event;
         while(window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
-            
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-                window.close();
+            switch(event.type)
+            {
+                case sf::Event::Closed:
+                    window.close();
+                    break;
+
+                case sf::Event::KeyPressed:
+                    switch(event.key.code)
+                    {
+                        case sf::Keyboard::Space:
+                            window.close();
+                            break;
+                    }
+                    break;
+
+                case sf::Event::MouseButtonPressed:
+                    switch(event.mouseButton.button)
+                    {
+                        case sf::Mouse::Left:
+                            std::cout << "Left" << std::endl;
+                            break;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+                    
         }
 
         window.clear(sf::Color::Black);
-
-        window.display();
+        window.draw(text);
+        window.display(); 
     }
 
     return 0;
