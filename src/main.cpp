@@ -7,21 +7,16 @@
 #include "bibli.hpp"
 #include "structs.hpp"
 
-sf::RenderWindow window;
-sf::CircleShape cercle;
-
 /*
     g++ -std=c++14 src/*.cpp -o bin/prog -I include -L lib -lsfml-graphics -lsfml-window -lsfml-system
 */
 
 int main()
 {
+    sf::RenderWindow window;
+
     window.create(sf::VideoMode(WIN_W, WIN_H), "My window", sf::Style::Fullscreen);
     window.setFramerateLimit(144);
-
-    cercle.setFillColor(sf::Color::Black);
-    cercle.setRadius(50);
-    cercle.setPosition(100, 100);
 
     while (window.isOpen())
     {
