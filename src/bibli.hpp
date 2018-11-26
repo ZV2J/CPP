@@ -1,8 +1,8 @@
 #ifndef __BIBLI__HPP__
 #define __BIBLI__HPP__
 
-#define WIN_W 1920
-#define WIN_H 1080
+#define WIN_W 800
+#define WIN_H 600
 
 void SF_Error(sf::RenderWindow *p);
 

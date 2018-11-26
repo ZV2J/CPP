@@ -15,7 +15,7 @@ int main()
 {
     sf::RenderWindow window;
 
-    window.create(sf::VideoMode(WIN_W, WIN_H), "My window", sf::Style::Fullscreen);
+    window.create(sf::VideoMode(WIN_W, WIN_H), "My window");
     window.setFramerateLimit(144);
 
     while (window.isOpen())
@@ -46,6 +46,9 @@ int main()
                             break;
                     }
                     break;
+
+                case sf::Event::MouseMoved:
+                    std::cout << "X = " << event.mouseMove.x << " | Y = " << event.mouseMove.y << std::endl;
 
                 default:
                     break;
