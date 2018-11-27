@@ -13,16 +13,72 @@
 
 int main()
 {
+    sf::Texture texture;
+    sf::Sprite sprite;
     sf::RenderWindow window;
+
+    int sprite_w = 32;
+    int sprite_h = 32;
 
     window.create(sf::VideoMode(WIN_W, WIN_H), "My window");
     window.setFramerateLimit(144);
+
+    if(!texture.loadFromFile("src/image.png"))
+        SF_Error(&window);
+
+    texture.setSmooth(true);
+
+    sprite.setTexture(texture);
+    sprite.setPosition(sf::Vector2f((WIN_W - sprite_w) / 2, (WIN_H - sprite_h) / 2));
 
     while (window.isOpen())
     {
         sf::Event event;
         while(window.pollEvent(event))
         {
+
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+            {
+                sprite.move(0, -10);
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+                    sprite.move(0.f, 10.f);
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+                    sprite.move(-10.f, 0.f);
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+                    sprite.move(10.f, 0.f);       
+            }
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            {
+                sprite.move(0.f, 10.f);
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+                    sprite.move(0.f, -10.f);
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+                    sprite.move(-10.f, 0.f);
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+                sprite.move(10.f, 0.f);
+            }
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+            {
+                sprite.move(-10.f, 0.f);
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+                    sprite.move(0.f, -10.f);
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+                    sprite.move(0.f, 10.f);
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+                    sprite.move(10.f, 0.f);
+
+            }
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            {
+                sprite.move(10.f, 0.f);
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+                    sprite.move(0.f, -10.f);
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+                    sprite.move(0.f, 10.f);
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+                    sprite.move(-10.f, 0.f);
+            }
+
             switch(event.type)
             {
                 case sf::Event::Closed:
@@ -38,18 +94,6 @@ int main()
                     }
                     break;
 
-                case sf::Event::MouseButtonPressed:
-                    switch(event.mouseButton.button)
-                    {
-                        case sf::Mouse::Left:
-                            std::cout << "Left" << std::endl;
-                            break;
-                    }
-                    break;
-
-                case sf::Event::MouseMoved:
-                    std::cout << "X = " << event.mouseMove.x << " | Y = " << event.mouseMove.y << std::endl;
-
                 default:
                     break;
             }
@@ -57,6 +101,7 @@ int main()
         }
 
         window.clear(sf::Color::Black);
+        window.draw(sprite);
         window.display(); 
     }
 
