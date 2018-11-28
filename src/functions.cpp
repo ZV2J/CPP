@@ -7,7 +7,9 @@
 #include "bibli.hpp"
 #include "structs.hpp"
 
-void SF_Error(sf::RenderWindow *p)
+void SF_Error(sf::RenderWindow *p1, const char *p2)
 {
-    (*p).close();
+    std::cout << "error : " << p2 << std::endl;
+    (*p1).close();
+    exit(EXIT_FAILURE);
 }

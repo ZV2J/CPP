@@ -13,9 +13,13 @@
 
 int main()
 {
+    const float speed = 10.f;
+
     sf::Texture texture;
     sf::Sprite sprite;
     sf::RenderWindow window;
+
+    sf::Clock clock;
 
     int sprite_w = 32;
     int sprite_h = 32;
@@ -24,7 +28,7 @@ int main()
     window.setFramerateLimit(144);
 
     if(!texture.loadFromFile("src/image.png"))
-        SF_Error(&window);
+        SF_Error(&window, "load src/image");
 
     texture.setSmooth(true);
 
@@ -39,44 +43,44 @@ int main()
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
             {
-                sprite.move(0, -10);
+                sprite.move(0, -speed);
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-                    sprite.move(0.f, 10.f);
+                    sprite.move(0, speed);
                 else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-                    sprite.move(-10.f, 0.f);
+                    sprite.move(-speed, 0);
                 else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-                    sprite.move(10.f, 0.f);       
+                    sprite.move(speed, 0);       
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
             {
-                sprite.move(0.f, 10.f);
+                sprite.move(0, speed);
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-                    sprite.move(0.f, -10.f);
+                    sprite.move(0, -speed);
                 else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-                    sprite.move(-10.f, 0.f);
+                    sprite.move(-speed, 0);
                 else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-                sprite.move(10.f, 0.f);
+                sprite.move(speed, 0);
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
             {
-                sprite.move(-10.f, 0.f);
+                sprite.move(-speed, 0);
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-                    sprite.move(0.f, -10.f);
+                    sprite.move(0, -speed);
                 else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-                    sprite.move(0.f, 10.f);
+                    sprite.move(0, speed);
                 else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-                    sprite.move(10.f, 0.f);
+                    sprite.move(speed, 0);
 
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
             {
-                sprite.move(10.f, 0.f);
+                sprite.move(speed, 0);
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-                    sprite.move(0.f, -10.f);
+                    sprite.move(0, -speed);
                 else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-                    sprite.move(0.f, 10.f);
+                    sprite.move(0, speed);
                 else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-                    sprite.move(-10.f, 0.f);
+                    sprite.move(-speed, 0);
             }
 
             switch(event.type)
@@ -99,6 +103,9 @@ int main()
             }
                     
         }
+
+        sf::Time time = clock.getElapsedTime();
+        clock.restart();
 
         window.clear(sf::Color::Black);
         window.draw(sprite);
